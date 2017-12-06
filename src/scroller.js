@@ -1,6 +1,6 @@
 
-const canvasSizeX = 160;
-const canvasSizeY = 80;
+const canvasSizeX = 320;
+const canvasSizeY = 160;
 
 let fontPromise = new Promise((resolve, reject) => {
 
@@ -49,6 +49,8 @@ fontPromise.then(()=>{
         scrollerCtx.drawImage(font, map[l][0],map[l][1], 32,32, c*32,0, 32,32);
     }
 
+    scrollerCtx = scrollerCtx.scale(1,-1);
+
     animate();
     
 });
@@ -60,9 +62,9 @@ function animate(){
     s += 0.05;
     offset -= 1;
     if (offset < -1*text.length*32) { offset = canvasSizeX }
-    
+
     for (let x=0; x<text.length*32; x++) {
-        ctx.drawImage(scroller, x,0, 1,32, x+offset,(canvasSizeY/2)+(5*Math.sin((x*0.05)+s)), 1,32);
+        ctx.drawImage(scroller, x,0, 1,32, x+offset+(7.5*Math.sin((x*0.05)+s)),(canvasSizeY*0.5)+(10*Math.sin((x*0.05)+s)), 2,32);
     }
 
     requestAnimationFrame(animate);
